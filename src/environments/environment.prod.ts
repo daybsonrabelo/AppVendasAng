@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  API: 'api/',
+  API: 'https://rosachique.azurewebsites.net/api/',
   BASE_URL: ''
 };
