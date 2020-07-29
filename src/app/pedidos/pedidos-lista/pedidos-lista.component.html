@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header">
+        <div class="float-left">
+            <h4>Pedidos</h4>
+        </div>
+        <div class="float-right">
+            <button class="btn btn-primary" [routerLink]="['novo']">Novo Pedido</button>&nbsp;
+            <button class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <table aria-describedby="Tabela de pedidos" class="table table-hover" *ngIf="pedidos$ | async as pedidos; else loading" >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Vlr. Pedido</th>
+                    <th>Status</th>
+                    <th>Data</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pedido of pedidos" >
+                    <td>{{ pedido.Id }}</td>
+                    <td>{{ pedido.Cliente }}</td>
+                    <td>{{ pedido.ValorTotal | currencyFormat }}</td>
+                    <td>{{ pedido.Status }}</td>
+                    <td>{{ pedido.DataPedido | date:'dd/MM/yyyy' }}</td>
+                    <td>
+                        <span class="float-right">
+                            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(pedido.Id)">Atualizar</button>
+                            &nbsp;
+                            <!-- <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(produto)">Remover</button> -->
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ng-template #loading>
+            <span>Carregando Pedidos...</span>
+        </ng-template>
+    </div>
+</div>

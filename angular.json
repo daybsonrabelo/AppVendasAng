@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MileVendasAng"
+    }
+  },
+  "defaultProject": "MileVendasAng",
+  "cli": {
+    "analytics": false
+  }
 }

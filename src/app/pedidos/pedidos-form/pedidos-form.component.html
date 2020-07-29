@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-6">
+        <form [formGroup]='form'>
+            <fieldset class="scheduler-border">
+                <legend class="scheduler-border">Dados Cliente</legend>
+                <div class="form-group">  
+                    <label for="cliente">Cliente</label>
+                    <input type="text" class="form-control" id="cliente" formControlName="cliente">
+                </div>
+                <div class="row">
+                    <div class="form-group col-sm-6">  
+                        <label for="cepOrigem">CEP Origem</label>
+                        <input type="text" class="form-control" id="cepOrigem" formControlName="cepOrigem">
+                    </div>
+                    <div class="form-group col-sm-6">  
+                        <label for="cepDestino">CEP Destino</label>
+                        <input type="text" class="form-control" id="cepDestino" formControlName="cepDestino">
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">  
+                <label for="produto">Produto</label>
+
+                <select class="form-control" id="produto" formControlName="idProduto" (change)="onChange($event.target)">
+                   <option *ngFor="let produto of produtos" [value]="produto.Id"> {{ produto.Descricao }}</option> 
+                </select>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-3">  
+                    <label for="quantidade">Quantidade</label>
+                    <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
+                </div>
+                <div class="form-group col-sm-3">  
+                    <label for="valorUnitario">Valor Unit</label>
+                    <input type="number" class="form-control" id="valorUnitario" formControlName="valorUnitario">
+                </div>
+                <div class="form-group col-sm-3">  
+                    <label for="comissao">Comissão Unit</label>
+                    <input type="number" class="form-control" id="comissao" formControlName="comissao">
+                </div>
+                <div class="form-group col-sm-3">  
+                    <label for="peso">Peso Unit</label>
+                    <input type="number" class="form-control" id="peso" formControlName="peso">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <button class="btn btn-primary" (click)="onInsert()">Inserir</button>
+                </div>
+                <div class="col-sm-6 d-flex flex-row-reverse">
+                    <button class="btn btn-secondary" (click)="onCalcularFrete()">Calcular Frete</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-6">
+        <p>Lista de produto</p>
+        <div>
+
+            <table aria-describedby="Tabela de linhas do pedido" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Vlr.</th>
+                        <th>Comissao</th>
+                        <th>Peso</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pedido of pedidoLinhas" >
+                        <td>{{ pedido.Id }}</td>
+                        <td>{{ pedido.Descricao }}</td>
+                        <td>{{ pedido.Quantidade }}</td>
+                        <td>{{ pedido.ValorUnitario | currencyFormat }}</td>
+                        <td>{{ pedido.Comissao | currencyFormat }}</td>
+                        <td>{{ pedido.Peso }} g</td>
+                        <td>
+                            <span class="float-right">
+                                <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(pedido.Id)">Atualizar</button>
+                                &nbsp;
+                                <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(pedido.Id)">Remover</button>
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot *ngIf="pedidoLinhas.length > 0" >
+                    <tr>
+                      <td colspan="2"><b>Totais</b></td>
+                      <td>{{ quantidadeProdutos }}</td>
+                      <td>{{ totalProdutos | currencyFormat }}</td>
+                      <td>{{ comissaoProdutos | currencyFormat }}</td>
+                      <td>{{ pesoProdutos }} kg</td>
+                      <td></td>
+                    </tr>
+                  </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+<div *ngIf="fretePAC || freteSedex" >
+    PAC: {{ fretePAC }}
+    Sedex: {{ freteSedex }}
+</div>

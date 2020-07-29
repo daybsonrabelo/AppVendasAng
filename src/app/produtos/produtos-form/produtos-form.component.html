@@ -1,0 +1,49 @@
+<form class="needs-validation separaDeCima" novalidate [formGroup]="form">
+    
+    <div class="form-group">
+        <label for="descricao">Descrição</label>
+        <input type="text" class="form-control" id="descricao" placeholder="Descrição do produto" formControlName="descricao">
+        <app-error-msg [control]="getCampo('descricao')" label="Descrição"></app-error-msg>
+    </div>
+
+    <div class="form-group">
+        <label for="grupo">Grupo</label>
+        <input type="text" class="form-control" id="grupo" placeholder="Grupo do produto" formControlName="grupo">
+    </div>
+
+    <div class="form-group">
+        <label for="subGrupo">SubGrupo</label>
+        <input type="text" class="form-control" id="subGrupo" placeholder="SubGrupo do produto" formControlName="subGrupo">
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="peso">Peso</label>
+            <input type="text" class="form-control" id="peso" formControlName="peso">
+            <app-error-msg [control]="getCampo('peso')" label="Peso"></app-error-msg>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="valorUnitario">Valor Unitário</label>
+            <input type="number" class="form-control" id="valorUnitario" formControlName="valorUnitario">
+            <app-error-msg [control]="getCampo('valorUnitario')" label="Valor unitário"></app-error-msg>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="comissao">Comissão</label>
+            <input type="number" class="form-control" id="comissao" formControlName="comissao">
+            <app-error-msg [control]="getCampo('comissao')" label="Comissão"></app-error-msg>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="quantidade">Quantidade Padrão</label>
+            <input type="number" class="form-control" id="quantidade" formControlName="quantidade">
+            <app-error-msg [control]="getCampo('quantidade')" label="Quantidade Padrão"></app-error-msg>
+        </div>
+    </div>
+    
+    <div class="separaDeCima">
+        <button type="submit" class="btn btn-primary" (click)="onSubmit()">Salvar</button>&nbsp;
+        <button type="button" class="btn btn-default" (click)="onCancel()">Cancelar</button>
+    </div>
+</form>

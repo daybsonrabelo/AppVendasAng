@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">
+        <div class="float-left">
+            <h4>Produtos</h4>
+        </div>
+        <div class="float-right">
+            <button class="btn btn-primary" [routerLink]="['novo']">Novo Produto</button>&nbsp;
+            <button class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
+        </div>
+    </div>
+    <div class="card-body">
+        <table aria-describedby="Tabela de produtos" class="table table-hover" *ngIf="produtos$ | async as prods; else loading" >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Produto</th>
+                    <th>Grupo</th>
+                    <th>SubGrupo</th>
+                    <th>Peso</th>
+                    <th>Vlr. Unit.</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let produto of prods" >
+                    <td>{{ produto.Id }}</td>
+                    <td>{{ produto.Descricao }}</td>
+                    <td>{{ produto.Grupo }}</td>
+                    <td>{{ produto.SubGrupo }}</td>
+                    <td>{{ produto.Peso }} g</td>
+                    <td>{{ produto.ValorUnitario | currencyFormat }}</td>
+                    <td>
+                        <span class="float-right">
+                            <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(produto.Id)">Atualizar</button>
+                            &nbsp;
+                            <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(produto)">Remover</button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ng-template #loading>
+            <span>Carregando Produtos...</span>
+        </ng-template>
+    </div>
+</div>
