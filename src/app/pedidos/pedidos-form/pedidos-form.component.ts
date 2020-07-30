@@ -48,7 +48,7 @@ export class PedidosFormComponent implements OnInit {
     this.form = this.fb.group({
       id: [null],
       cliente: [null],
-      cepOrigem: ['69895000'],
+      cepOrigem: ['60541658'],
       cepDestino: [null],
       idProduto: [null, [Validators.required]],
       quantidade: [null, [Validators.required]],

@@ -34,7 +34,7 @@ export class ProdutosListaComponent implements OnInit {
   onRefresh() {
     //console.log('callAPI');
     //this.http.get("https://localhost:44323/api/produtos").subscribe(res => console.log(res));
-    this.http.get(`${environment.API}produtos`).subscribe(res => console.log(res));
+    //this.http.get(`${environment.API}produtos`).subscribe(res => console.log(res));
 
     this.produtos$ = this.prodService.list()
     .pipe(
